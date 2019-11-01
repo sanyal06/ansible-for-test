@@ -1,0 +1,23 @@
+
+- name: Check for docker installation
+  become: root
+  service: 
+    name: docker
+    state: reloaded
+
+- name: Just for fun
+  command: "{{item.name}}"
+  with_items: 
+    - { name: ' docker pull httpd' }
+    - { name: 'docker run -id httpd' }
+
+- name: Transfering the file
+  copy: 
+    src: /root/ansibletest/docker/roles/check_dock/tasks/doc.sh
+    dest: /root/ 
+    mode: 0777
+   
+- name: Instaling the package  
+  command: echo "Thanks for using this"
+
+

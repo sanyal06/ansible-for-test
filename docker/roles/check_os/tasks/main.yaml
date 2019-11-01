@@ -1,0 +1,7 @@
+
+- name: Check for Operating
+  become_user: root
+  yum:
+    name: docker
+    state: latest
+  when: ansible_distribution == 'CentOS'

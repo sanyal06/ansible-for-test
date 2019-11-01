@@ -1,0 +1,9 @@
+---
+
+- hosts: prd
+  become: true
+  
+  roles:
+    - { role: check_os }
+    - { role: check_dock }
+    - { role: create_con }

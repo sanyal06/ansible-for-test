@@ -1,0 +1,29 @@
+
+- name: Install required Pachage
+  yum:
+    name: epel-release,python2-pip 
+    state: latest
+    
+- name: Install required PIP service
+  pip:
+    name: docker
+
+- name: Create volume
+  docker_volume:
+    name: data
+
+- name: Create a data containar
+  docker_container:
+    name: httpd
+    image: httpd
+    volumes:
+      - /data
+
+- name: Create redis container
+  docker_container:
+    name: myredis
+    image: redis
+    state: present
+    exposed_ports:
+     - 1234
+
