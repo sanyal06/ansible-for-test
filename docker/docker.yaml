@@ -7,3 +7,4 @@
     - { role: check_os }
     - { role: check_dock }
     - { role: create_con }
+    - { role: testdir }
