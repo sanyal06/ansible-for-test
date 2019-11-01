@@ -1,0 +1,23 @@
+
+- name: Install, configure, and start Apache
+  block:
+    - name: install httpd and memcached
+      yum:
+        name:
+        - httpd
+        - memcached
+        state: present
+    - name: apply the foo config template
+      template:
+        src: /root/ansibletest/docker/roles/testdir/tasks/src.j2
+        dest: /etc/foo.conf
+    - name: start service docker  and enable it
+      service:
+        name: docker
+        state: restarted
+        enabled: True
+
+  when: ansible_facts['distribution'] == 'CentOS'
+  become: true
+  become_user: root
+  ignore_errors: yes
