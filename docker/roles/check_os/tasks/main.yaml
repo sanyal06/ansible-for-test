@@ -1,12 +1,10 @@
 
-- name: Check for Operating
+- name: Check for Operating and packages
+  become: true
   become_user: root
-  block:
-   - name: Check for docker packages
-     yum:
-       name: docker
-       state: latest
-       msg: "We are installing Docker as docker is not install on remote machine"
-    
-  when: ansible_facts['distribution'] == 'CentOS' or ansible_facts['mount'] == '/var/lib/docker/containers'
-  ignore_errors: yes
+  yum:
+     name: docker
+     state: latest
+- debug:
+     msg: 'We are installing Docker as docker is not install on remote machine'  
+  when: ansible_facts['distribution'] == 'CentOS'
